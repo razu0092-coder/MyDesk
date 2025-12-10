@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>All-in-One Index</title>
+  <meta name="description" content="One-file example with HTML, CSS and JS (responsive, accessible, dark mode)" />
+  <style>
+    /* ====== Base / Reset ====== */
+    :root{
+      --bg: #f7f7fb;
+      --card:#fff;
+      --text:#0f1724;
+      --muted:#475569;
+      --accent:#2563eb;
+      --radius:14px;
+      color-scheme: light;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1220;
+      --card:#071127;
+      --text:#e6eef8;
+      --muted:#9fb3d6;
+      --accent:#60a5fa;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg), #eef4ff 120%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:24px;
+    }
+
+    /* ====== Layout ====== */
+    .container{max-width:1100px;margin:0 auto;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:46px;height:46px;border-radius:12px;
+      display:grid;place-items:center;font-weight:700;
+      background:linear-gradient(135deg,var(--accent),#7dd3fc33);
+      color:var(--card);box-shadow:0 6px 18px rgba(2,6,23,.12);
+    }
+    nav ul{display:flex;gap:12px;margin:0;padding:0;list-style:none}
+    nav a{padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600}
+    nav a:hover{color:var(--text);background:rgba(0,0,0,0.04);}
+
+    /* ====== Hero ====== */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:22px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:0 6px 24px rgba(2,6,23,.06)}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0;color:var(--muted)}
+
+    /* ====== Cards grid ====== */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:18px}
+    .item{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(0,0,0,0.03)}
+    .item h3{margin:0 0 6px;font-size:16px}
+    .meta{color:var(--muted);font-size:13px}
+
+    /* ====== Controls ====== */
+    .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:0;background:var(--accent);color:white;font-weight:700;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(37,99,235,.12)}
+    .search{display:flex;gap:8px;align-items:center}
+    input[type="search"]{padding:8px 10px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);outline:none;min-width:180px}
+
+    /* ====== Modal ====== */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+    .modal{max-width:720px;width:100%}
+    .modal .card{padding:22px}
+    .modal-backdrop.show{display:flex}
+
+    /* ====== Footer ====== */
+    footer{margin-top:26px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* ====== Responsive ====== */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <header>
+      <div class="brand" aria-label="brand">
+        <div class="logo" aria-hidden="true">RW</div>
+        <div>
+          <div style="font-weight:800">Royal Widget</div>
+          <div style="font-size:13px;color:var(--muted)">All-in-one single file demo</div>
+        </div>
+      </div>
+
+      <nav aria-label="primary navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#" id="openModal">Get Started</a></li>
+        </ul>
+      </nav>
+
+      <div class="controls">
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="Search features..." aria-label="search features"/>
+        </div>
+        <button id="toggleTheme" class="btn secondary" title="Toggle dark mode">Toggle Theme</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card" id="home">
+          <h1>Single-file HTML · CSS · JS</h1>
+          <p class="lead">একই ফাইলে সম্পূর্ণ UI ও ইন্টার‍্যাকশন—responsive, accessible এবং সহজভাবে কাস্টমাইজেবল। নিচের বাটনগুলো ট্রাই করুন।</p>
+          <div style="height:14px"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="showAlert">Show Welcome</button>
+            <button class="btn secondary" id="addCard">Add Card</button>
+            <button class="btn" id="openModal2">Open Modal</button>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="quick info">
+          <h3 style="margin-top:0">Quick stats</h3>
+          <p class="meta">Cards: <strong id="cardCount">4</strong></p>
+          <p class="meta">Theme: <span id="curTheme">Light</span></p>
+          <div style="height:8px"></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" id="downloadJSON">Export</button>
+            <button class="btn secondary" id="resetDemo">Reset</button>
+          </div>
+        </aside>
+      </section>
+
+      <section id="features" class="card" style="margin-top:18px">
+        <h2 style="margin-top:0">Features</h2>
+        <p class="lead">Search, create cards, open modal, toggle theme — সবই এখানে।</p>
+
+        <div class="grid" id="grid">
+          <!-- initial items -->
+          <div class="item">
+            <h3>Responsive layout</h3>
+            <div class="meta">Adapts to mobile & desktop</div>
+          </div>
+          <div class="item">
+            <h3>Dark / Light</h3>
+            <div class="meta">Accessible theme toggle</div>
+          </div>
+          <div class="item">
+            <h3>Modal</h3>
+            <div class="meta">Keyboard-friendly</div>
+          </div>
+          <div class="item">
+            <h3>Export data</h3>
+            <div class="meta">Download sample JSON</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- modal -->
+    <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal card" role="document" aria-labelledby="modalTitle">
+        <h3 id="modalTitle">Welcome to the single-file demo</h3>
+        <p class="meta">This modal is keyboard accessible. Press Esc or click outside to close.</p>
+        <div style="height:12px"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn secondary" id="closeModal">Close</button>
+          <button class="btn" id="acceptModal">Nice!</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Made with ❤️ — Single file demo</div>
+      <div><small>Tip: save as <code>index.html</code> and open in browser</small></div>
+    </footer>
+  </div>
+
+  <script>
+    // ====== Tiny JS app ======
+    (function(){
+      const body = document.documentElement;
+      const modal = document.getElementById('modal');
+      const openModalLink = document.getElementById('openModal');
+      const openModalBtn = document.getElementById('openModal2');
+      const closeModalBtn = document.getElementById('closeModal');
+      const acceptModalBtn = document.getElementById('acceptModal');
+      const showAlertBtn = document.getElementById('showAlert');
+      const addCardBtn = document.getElementById('addCard');
+      const grid = document.getElementById('grid');
+      const cardCount = document.getElementById('cardCount');
+      const curTheme = document.getElementById('curTheme');
+      const toggleTheme = document.getElementById('toggleTheme');
+      const searchInput = document.getElementById('searchInput');
+      const downloadJSON = document.getElementById('downloadJSON');
+      const resetDemo = document.getElementById('resetDemo');
+
+      // initial state
+      let state = {
+        theme: localStorage.getItem('rw-theme') || 'light',
+        items: [
+          {title:'Responsive layout', meta:'Adapts to mobile & desktop'},
+          {title:'Dark / Light', meta:'Accessible theme toggle'},
+          {title:'Modal', meta:'Keyboard-friendly'},
+          {title:'Export data', meta:'Download sample JSON'}
+        ]
+      };
+
+      function renderItems(list){
+        grid.innerHTML = '';
+        list.forEach(it=>{
+          const el = document.createElement('div');
+          el.className = 'item';
+          el.innerHTML = '<h3>' + escapeHtml(it.title) + '</h3><div class="meta">' + escapeHtml(it.meta) + '</div>';
+          grid.appendChild(el);
+        });
+        cardCount.textContent = list.length;
+      }
+
+      // escape
+      function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      // theme
+      function applyTheme(name){
+        if(name === 'dark'){
+          body.setAttribute('data-theme','dark');
+          curTheme.textContent = 'Dark';
+        } else {
+          body.removeAttribute('data-theme');
+          curTheme.textContent = 'Light';
+        }
+        localStorage.setItem('rw-theme', name);
+      }
+      applyTheme(state.theme);
+
+      // modal controls
+      function showModal(){
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+        // trap focus to modal
+        const focusable = modal.querySelector('button, [tabindex]:not([tabindex="-1"])');
+        if(focusable) focusable.focus();
+      }
+      function hideModal(){
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
+      }
+      openModalLink.addEventListener('click', (e)=>{ e.preventDefault(); showModal(); });
+      openModalBtn.addEventListener('click', showModal);
+      closeModalBtn.addEventListener('click', hideModal);
+      acceptModalBtn.addEventListener('click', ()=>{ alert('Thanks!'); hideModal(); });
+
+      // close on backdrop click
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal) hideModal();
+      });
+      // esc key
+      window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') hideModal(); });
+
+      // show welcome
+      showAlertBtn.addEventListener('click', ()=>{
+        alert('স্বাগতম! Single-file demo তে আপনাকে স্বাগত।');
+      });
+
+      // add card
+      addCardBtn.addEventListener('click', ()=>{
+        const title = prompt('নতুন কার্ডের শিরোনাম লিখুন:', 'New Feature');
+        if(title) {
+          state.items.push({title: title, meta: 'User added'});
+          renderItems(state.items);
+          window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
+        }
+      });
+
+      // search
+      searchInput.addEventListener('input', (e)=>{
+        const q = e.target.value.trim().toLowerCase();
+        if(!q) return renderItems(state.items);
+        const filtered = state.items.filter(it => (it.title+ ' ' + it.meta).toLowerCase().includes(q));
+        renderItems(filtered);
+      });
+
+      // export JSON (download)
+      downloadJSON.addEventListener('click', ()=>{
+        const data = JSON.stringify(state, null, 2);
+        const blob = new Blob([data], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'demo-data.json'; document.body.appendChild(a); a.click();
+        a.remove(); URL.revokeObjectURL(url);
+      });
+
+      // reset
+      resetDemo.addEventListener('click', ()=>{
+        if(!confirm('Demo reset করবেন?')) return;
+        state.items = [
+          {title:'Responsive layout', meta:'Adapts to mobile & desktop'},
+          {title:'Dark / Light', meta:'Accessible theme toggle'},
+          {title:'Modal', meta:'Keyboard-friendly'},
+          {title:'Export data', meta:'Download sample JSON'}
+        ];
+        renderItems(state.items);
+      });
+
+      // theme toggle button
+      toggleTheme.addEventListener('click', ()=>{
+        state.theme = (state.theme === 'dark') ? 'light' : 'dark';
+        applyTheme(state.theme);
+      });
+
+      // render initial
+      renderItems(state.items);
+
+      // small accessibility: focus outline for keyboard users
+      (function detectKeyboard(){
+        function handleFirstTab(e){
+          if(e.key === 'Tab') document.documentElement.classList.add('user-is-tabbing')
+        }
+        window.addEventListener('keydown', handleFirstTab, {once:true});
+      })();
+
+    })();
+  </script>
+</body>
+</html>
