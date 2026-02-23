@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Orange App Welcome</title>
+<title>Bright App Welcome</title>
 
 <style>
 *{
@@ -21,7 +21,6 @@ body{
     align-items:center;
 }
 
-/* Mobile Container */
 .container{
     width:100%;
     max-width:430px;
@@ -35,7 +34,6 @@ body{
     position:relative;
 }
 
-/* Desktop preview style */
 @media (min-width:768px){
     .container{
         border-radius:25px;
@@ -46,13 +44,13 @@ body{
 
 .header{
     padding-top:50px;
-    font-size:22px;
+    font-size:26px;
     font-weight:bold;
     color:#7b2ff7;
 }
 
 .welcome{
-    margin-top:25px;
+    margin-top:20px;
     font-size:28px;
     font-weight:bold;
     color:#6a11cb;
@@ -70,6 +68,7 @@ body{
     width:60%;
     max-width:250px;
     animation:bounce 2.5s infinite;
+    cursor:pointer;
 }
 
 @keyframes bounce{
@@ -79,7 +78,7 @@ body{
 }
 
 .dots{
-    margin-bottom:15px;
+    margin-bottom:30px;
 }
 
 .dot{
@@ -95,46 +94,19 @@ body{
 .active{
     background:#7b2ff7;
 }
-
-.skip{
-    margin-bottom:15px;
-    color:#7b2ff7;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.footer{
-    padding:20px;
-    background:#6a11cb;
-    padding-bottom:calc(20px + env(safe-area-inset-bottom));
-}
-
-.footer button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:30px;
-    font-size:16px;
-    font-weight:bold;
-    color:white;
-    background:linear-gradient(90deg,#ff8c00,#ff3c00);
-    cursor:pointer;
-}
-
-.footer button:active{
-    transform:scale(.97);
-}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-    <div class="header">lemondrop</div>
+    <div class="header">ব্রাইট</div>
     <div class="welcome">Welcome!</div>
 
     <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg" alt="Orange">
+        <a id="autoLink" href="https://sites.google.com/d/1SUavq-grFTL7gHu6C21SpXmXdNpzTtgo/p/1npzzSgk7wS76_4htxBQRwax1DzN0M9al/edit">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg" alt="Orange">
+        </a>
     </div>
 
     <div class="dots">
@@ -142,23 +114,16 @@ body{
         <span class="dot"></span>
         <span class="dot"></span>
     </div>
-
-    <div class="skip" onclick="skipPage()">Skip</div>
-
-    <div class="footer">
-        <button onclick="startApp()">Get Started</button>
-    </div>
 </div>
 
 <script>
-function startApp(){
-    alert("Welcome to the App 🚀");
-}
 
-function skipPage(){
-    alert("Skipped Welcome Page");
-}
+// 1 second পরে auto redirect
+setTimeout(function(){
+    document.getElementById("autoLink").click();
+}, 5000);
 
+// dot animation
 let dots=document.querySelectorAll(".dot");
 let current=0;
 
@@ -167,6 +132,7 @@ setInterval(()=>{
     current=(current+1)%dots.length;
     dots[current].classList.add("active");
 },2000);
+
 </script>
 
 </body>
